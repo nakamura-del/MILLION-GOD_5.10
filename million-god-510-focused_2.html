@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>5/10 ゴッドの日 全国検証 | L/ ミリオンゴッド /CX</title>
+<style>
+  :root{
+    --ink:#0f1a2b; --sub:#334155; --mute:#64748b;
+    --bg:#f8fafc; --card:#ffffff; --line:#e2e8f0;
+    --god:#7c3aed; --god-dk:#5b21b6; --god-bg:#f5f3ff; --god-glow:rgba(124,58,237,.15);
+    --gold:#d97706; --gold-bg:#fef3c7;
+    --hot:#dc2626; --hot-bg:#fef2f2;
+    --good:#059669; --good-bg:#d1fae5;
+    --pri:#0ea5e9; --pri-bg:#e0f2fe;
+    --user:#06b6d4; --user-bg:#cffafe;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","BIZ UDPGothic","Yu Gothic",sans-serif;line-height:1.65;font-size:14px;letter-spacing:.01em}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+
+  .hero{
+    background:linear-gradient(135deg,#1e0a3c 0%,#5b21b6 40%,#7c3aed 100%);
+    color:#fff;border-radius:14px;padding:32px 30px;margin:10px 0 28px;
+    box-shadow:0 8px 32px rgba(124,58,237,.3);
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"510";position:absolute;right:-30px;top:-40px;
+    font-size:240px;font-weight:900;color:rgba(255,255,255,.06);letter-spacing:-.1em;
+    font-feature-settings:"tnum"
+  }
+  .hero .eyebrow{font-size:12px;color:#c4b5fd;font-weight:700;letter-spacing:.2em;margin-bottom:8px}
+  .hero h1{font-size:30px;font-weight:900;margin:0 0 8px;letter-spacing:.02em;line-height:1.3}
+  .hero .lead{font-size:14px;color:#e9d5ff;margin:6px 0;max-width:780px}
+  .hero .stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative;z-index:2}
+  .hero .stat{background:rgba(255,255,255,.1);border:1px solid rgba(196,181,253,.4);padding:6px 14px;border-radius:14px;font-size:12.5px;color:#fff;backdrop-filter:blur(8px)}
+  .hero .stat strong{color:#fde047;font-weight:800}
+
+  h2{font-size:18px;font-weight:800;margin:40px 0 14px;padding:10px 16px;background:linear-gradient(90deg,var(--god-bg),transparent);border-left:4px solid var(--god);border-radius:0 6px 6px 0;color:var(--god-dk)}
+  h3{font-size:15px;font-weight:700;margin:22px 0 10px;color:var(--god-dk);border-bottom:2px solid var(--line);padding-bottom:6px}
+  h4{font-size:13.5px;font-weight:700;margin:14px 0 8px;color:var(--sub)}
+  p{margin:8px 0}
+
+  .mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+  .mega{background:#fff;border:1px solid #ddd6fe;border-radius:10px;padding:16px 18px;border-top:4px solid var(--god);position:relative;overflow:hidden}
+  .mega .lbl{font-size:11px;color:var(--mute);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .mega .num{font-size:32px;font-weight:900;color:var(--god);margin:6px 0 2px;font-feature-settings:"tnum";letter-spacing:-.02em}
+  .mega .sub{font-size:11.5px;color:var(--sub)}
+  .mega .ratio{display:inline-block;font-size:11px;background:var(--god-bg);color:var(--god-dk);padding:2px 8px;border-radius:10px;font-weight:700;margin-top:4px}
+
+  .multi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}
+  .multi{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 12px;text-align:center;border-top:3px solid #c4b5fd}
+  .multi .setting{font-size:11px;color:var(--mute);font-weight:700}
+  .multi .val{font-size:22px;font-weight:900;color:var(--god-dk);margin:4px 0;font-feature-settings:"tnum"}
+  .multi .change{font-size:10.5px;color:var(--sub);font-weight:600}
+  .multi.hi{border-top-color:var(--god);background:var(--god-bg)}
+  .multi.hi .val{color:var(--god)}
+  .multi.down{border-top-color:#94a3b8}
+  .multi.down .val{color:var(--mute)}
+
+  .callout{background:#fff;border:1px solid var(--line);border-left:4px solid var(--god);border-radius:0 8px 8px 0;padding:16px 20px;margin:14px 0}
+  .callout.god{border-left-color:var(--god);background:var(--god-bg);border-color:#ddd6fe}
+  .callout.hot{border-left-color:var(--hot);background:var(--hot-bg)}
+  .callout.gold{border-left-color:var(--gold);background:var(--gold-bg);border-color:#fde68a}
+  .callout.user{border-left-color:var(--user);background:var(--user-bg);border-color:#a5f3fc}
+  .callout strong{color:var(--ink)}
+  .callout.god strong{color:var(--god-dk)}
+
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;font-size:12.5px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;font-feature-settings:"tnum"}
+  th{background:#f1f5f9;color:var(--sub);font-weight:700;font-size:12px;text-align:center;border-bottom:2px solid var(--line)}
+  td:first-child,th:first-child{text-align:left}
+  tr:hover td{background:#f8fafc}
+  tr.god-row td{background:var(--god-bg);font-weight:700;color:var(--god-dk)}
+  tr.god-row td:first-child::before{content:"★ ";color:var(--god)}
+  tr.prev-row td{background:#f8fafc;color:var(--sub)}
+  tr.sum td{background:var(--god-bg);font-weight:700;color:var(--god-dk);border-top:2px solid #c4b5fd}
+  tr.highlight td{background:#fffbeb}
+
+  .num-pos{color:var(--good);font-weight:700}
+  .num-neg{color:var(--hot);font-weight:700}
+  .num-mega-pos{color:var(--god);font-weight:800}
+  .num-user{color:var(--user);font-weight:700}
+
+  .bar-chart{margin:14px 0}
+  .bar-row{display:grid;grid-template-columns:90px 1fr 110px;gap:10px;align-items:center;margin:6px 0;font-size:12.5px}
+  .bar-row .bar-label{font-weight:600;color:var(--sub)}
+  .bar-track{background:#f1f5f9;height:26px;border-radius:4px;position:relative;overflow:hidden}
+  .bar-fill{height:100%;display:flex;align-items:center;padding:0 8px;color:#fff;font-weight:700;font-size:11px;border-radius:4px;white-space:nowrap}
+  .bar-fill.normal{background:linear-gradient(90deg,#94a3b8,#64748b)}
+  .bar-fill.god{background:linear-gradient(90deg,#a78bfa,#7c3aed);box-shadow:0 0 8px rgba(124,58,237,.3)}
+  .bar-val{font-weight:700;color:var(--ink);font-feature-settings:"tnum"}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .panel h4{margin-top:0;color:var(--god-dk);font-size:14px}
+  .panel.god{background:linear-gradient(135deg,#faf5ff 0%,#f3e8ff 100%);border-color:#e9d5ff}
+  .panel.gold{background:var(--gold-bg);border-color:#fde68a}
+  .panel.gold h4{color:#92400e}
+  .panel.user{background:var(--user-bg);border-color:#a5f3fc}
+  .panel.user h4{color:#0e7490}
+  .panel .big-num{font-size:36px;font-weight:900;color:var(--god);margin:8px 0;font-feature-settings:"tnum";letter-spacing:-.02em;line-height:1}
+  .panel.gold .big-num{color:#92400e}
+  .panel.user .big-num{color:#0e7490}
+
+  ul.tight{margin:6px 0;padding-left:18px;font-size:13px;color:var(--sub)}
+  ul.tight li{margin:4px 0}
+
+  .vs-header{display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:center;margin:18px 0 8px}
+  .vs-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 18px;text-align:center}
+  .vs-card.prev{background:#f8fafc}
+  .vs-card.god{background:var(--god-bg);border-color:#c4b5fd}
+  .vs-card .day{font-size:18px;font-weight:800;color:var(--ink)}
+  .vs-card.god .day{color:var(--god-dk)}
+  .vs-card .desc{font-size:12px;color:var(--sub);margin-top:2px}
+  .vs-arrow{font-size:28px;text-align:center;color:var(--god);font-weight:900}
+
+  .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+  .impact{background:#fff;border:2px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .impact.x{border-color:var(--god);background:linear-gradient(135deg,#faf5ff,#fff)}
+  .impact .lbl{font-size:11px;color:var(--mute);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .impact .x-num{font-size:38px;font-weight:900;color:var(--god);margin:6px 0;font-feature-settings:"tnum";letter-spacing:-.04em;line-height:1}
+  .impact .x-sub{font-size:11.5px;color:var(--sub)}
+
+  .footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--mute);text-align:center}
+
+  @media (max-width:760px){
+    .mega-grid{grid-template-columns:repeat(2,1fr)}
+    .multi-grid{grid-template-columns:repeat(3,1fr)}
+    .grid-2,.grid-3,.impact-grid{grid-template-columns:1fr}
+    body{font-size:13px}
+    .hero h1{font-size:22px}
+    .hero::before{font-size:160px}
+    .panel .big-num{font-size:28px}
+    th,td{padding:5px 6px;font-size:11.5px}
+    .vs-header{grid-template-columns:1fr;gap:6px}
+    .vs-arrow{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="eyebrow">🟣 SPECIAL REPORT ／ 機種ネタ日 全国検証</div>
+  <h1>5/10「ゴッドの日」全国検証レポート<br><span style="font-size:18px;font-weight:600;color:#c4b5fd">前日5/9との直接比較で見えた一日の異変</span></h1>
+  <p class="lead">2026年5月10日（日）— 「510＝ゴッド」のゴロ合わせで全国一斉に攻めた特異日。<strong style="color:#fde047">設定6使用率が×5.47倍、MY15,000枚オーバー出現率が×7.53倍、お客様勝率が+9.39pt</strong>という、たった24時間で起きた業界全体の同期現象を全実数で検証する。<br><strong style="color:#fde047">★ 次回ユーザー期待日は「6/6（土）」がゾロ目＝設定6狙いで最有力</strong></p>
+  <div class="stats">
+    <span class="stat">対象: <strong>2026/05/10（日）vs 2026/05/09（土）</strong></span>
+    <span class="stat">機種: <strong>L/ ミリオンゴッド /CX</strong></span>
+    <span class="stat">発売: <strong>2026/04/19</strong></span>
+    <span class="stat">次回期待日: <strong>6/6（土）ゾロ目</strong></span>
+  </div>
+</div>
+
+<!-- ============== 結論ファースト ============== -->
+<h2>🎯 結論：5/9と5/10の間に何が起きたか</h2>
+
+<div class="vs-header">
+  <div class="vs-card prev">
+    <div class="day">5/9（土）</div>
+    <div class="desc">通常の週末稼働日</div>
+  </div>
+  <div class="vs-arrow">→</div>
+  <div class="vs-card god">
+    <div class="day">5/10（日）★ゴッドの日</div>
+    <div class="desc">機種ネタ日</div>
+  </div>
+</div>
+
+<div class="callout god">
+  <strong>たった1日で起きた変化：</strong>店側は <strong>設定1の使用率を46.67% → 27.50%（×0.59）に絞り込み、設定6の使用率を2.64% → 14.43%（×5.47倍）に拡大</strong>。結果として <strong>MY10,000+ 出現率6.13% → 9.90%（×1.62倍）、MY15,000+ 出現率0.15% → 1.13%（×7.53倍）</strong>、お客様勝率は <strong>31.23% → 40.62%（+9.39pt）</strong>に跳ね上がった。<strong>店側は1台あたり玉利を1.169 → 0.284まで圧縮</strong>し、「ゴッドの日プロモ」として粗利を約76%放出した。
+</div>
+
+<div class="mega-grid">
+  <div class="mega">
+    <div class="lbl">設定6 使用率</div>
+    <div class="num">×5.47</div>
+    <div class="sub">2.64% → 14.43%</div>
+    <span class="ratio">+11.79pt</span>
+  </div>
+  <div class="mega">
+    <div class="lbl">MY10,000+ 出現率</div>
+    <div class="num">×1.62</div>
+    <div class="sub">6.13% → 9.90%</div>
+    <span class="ratio">+3.77pt</span>
+  </div>
+  <div class="mega">
+    <div class="lbl">MY15,000+ 出現率</div>
+    <div class="num">×7.53</div>
+    <div class="sub">0.15% → 1.13%</div>
+    <span class="ratio">+0.98pt</span>
+  </div>
+  <div class="mega">
+    <div class="lbl">お客様勝率</div>
+    <div class="num">+9.39pt</div>
+    <div class="sub">31.23% → 40.62%</div>
+    <span class="ratio">5台中2台で勝てた日</span>
+  </div>
+</div>
+
+<!-- ============== 設定振替 ============== -->
+<h2>1｜設定使用率の劇的シフト：設定1を絞り、4-5-6を一気に厚く</h2>
+
+<p>5/9（土）→ 5/10（日）の使用率変化を全設定で比較。設定が上がるほど倍率が大きくなる「上方シフト」が完全に成立している。</p>
+
+<table>
+  <thead>
+    <tr><th>設定</th><th>5/9 使用率</th><th>5/10 使用率</th><th>差分pt</th><th>倍率</th><th>シフト方向</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>設定1</td><td>46.67%</td><td>27.50%</td><td><span class="num-neg">-19.17pt</span></td><td>×0.59</td><td>大幅減少</td></tr>
+    <tr><td>設定2</td><td>23.56%</td><td>14.99%</td><td><span class="num-neg">-8.57pt</span></td><td>×0.64</td><td>減少</td></tr>
+    <tr><td>設定3</td><td>21.77%</td><td>24.05%</td><td><span class="num-pos">+2.28pt</span></td><td>×1.10</td><td>微増</td></tr>
+    <tr><td>設定4</td><td>2.95%</td><td>11.87%</td><td><span class="num-mega-pos">+8.92pt</span></td><td><strong>×4.02</strong></td><td>大幅増</td></tr>
+    <tr><td>設定5</td><td>2.41%</td><td>7.16%</td><td><span class="num-mega-pos">+4.75pt</span></td><td><strong>×2.97</strong></td><td>大幅増</td></tr>
+    <tr><td>設定6</td><td>2.64%</td><td>14.43%</td><td><span class="num-mega-pos">+11.79pt</span></td><td><strong>×5.47</strong></td><td><strong>異次元増</strong></td></tr>
+    <tr class="sum"><td>高設定計（4+5+6）</td><td>8.00%</td><td>33.46%</td><td><strong>+25.46pt</strong></td><td><strong>×4.18</strong></td><td>全国一斉投入</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>★ 振替の構造：</strong>低設定群（1+2）の使用率合計が <strong>70.23% → 42.49%（-27.74pt）</strong>、高設定群（4+5+6）が <strong>8.00% → 33.46%（+25.46pt）</strong>。<strong>店舗4軒中1軒以上の島構成が一晩で書き換わった</strong>ことを意味する。これは個別ホールの判断の積み上げではなく、業界全体が「ゴッドの日は攻める」と暗黙合意した結果。
+</div>
+
+<h3>視覚化：低設定 vs 高設定の使用率変化</h3>
+
+<div class="bar-chart">
+  <div class="bar-row">
+    <div class="bar-label">設定1</div>
+    <div class="bar-track"><div class="bar-fill normal" style="width:93%">5/9: 46.67%</div></div>
+    <div class="bar-val">▼ -19.17pt</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"></div>
+    <div class="bar-track"><div class="bar-fill god" style="width:55%">5/10: 27.50%</div></div>
+    <div class="bar-val">×0.59</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">設定6</div>
+    <div class="bar-track"><div class="bar-fill normal" style="width:5%">2.6%</div></div>
+    <div class="bar-val">▲ +11.79pt</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"></div>
+    <div class="bar-track"><div class="bar-fill god" style="width:29%">5/10: 14.43%</div></div>
+    <div class="bar-val">×5.47</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">高設定計</div>
+    <div class="bar-track"><div class="bar-fill normal" style="width:16%">5/9: 8.00%</div></div>
+    <div class="bar-val">▲ +25.46pt</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"></div>
+    <div class="bar-track"><div class="bar-fill god" style="width:67%">5/10: 33.46%</div></div>
+    <div class="bar-val">×4.18</div>
+  </div>
+</div>
+
+<!-- ============== ★MY値分析 ============== -->
+<h2>2｜★ MY（一撃出玉）の大爆発 — 「出る日」が現実化した</h2>
+
+<p style="color:var(--sub);font-size:13px">MY（マイ）とは <strong>一撃あたりの最大連続出玉枚数</strong>のこと。「一日で何枚出た」ではなく「一気にどれだけ出たか」を示す指標。MY10,000+は「ATで一撃1万枚超え達成」、MY15,000+は「夢のような一日の象徴」。出現率の前日比は、まさに <strong>「出ない機種」から「出る機種」への一日反転</strong>を物理的に示している。</p>
+
+<h3>全設定平均のMYオーバー率 — 5/9 vs 5/10</h3>
+
+<table>
+  <thead>
+    <tr><th>MY水準</th><th>5/9 出現率</th><th>5/10 出現率</th><th>絶対差</th><th>倍率</th><th>解釈</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>MY 3,000+</td><td>52.49%</td><td>59.53%</td><td>+7.04pt</td><td>×1.13</td><td>「出た」体感を生むライン</td></tr>
+    <tr><td>MY 5,000+</td><td>31.21%</td><td>36.53%</td><td>+5.32pt</td><td>×1.17</td><td>3台に1台が5,000枚超</td></tr>
+    <tr><td>MY 7,000+</td><td>16.44%</td><td>21.90%</td><td>+5.46pt</td><td>×1.33</td><td>5台に1台が7,000枚超</td></tr>
+    <tr class="highlight"><td><strong>MY 10,000+</strong></td><td>6.13%</td><td><strong>9.90%</strong></td><td><strong>+3.77pt</strong></td><td><strong>×1.62</strong></td><td><strong>10台に1台が一撃1万枚</strong></td></tr>
+    <tr><td>MY 12,000+</td><td>2.36%</td><td>4.45%</td><td>+2.09pt</td><td>×1.89</td><td>夢の領域</td></tr>
+    <tr class="god-row"><td><strong>MY 15,000+</strong></td><td>0.15%</td><td><strong>1.13%</strong></td><td><strong>+0.98pt</strong></td><td><strong>×7.53</strong></td><td><strong>「神の出玉」がほぼ100台に1台</strong></td></tr>
+    <tr><td>MY 19,000+（コンプ）</td><td>—</td><td><strong>0.23%</strong></td><td>—</td><td>—</td><td>500台に1台超で起きた</td></tr>
+  </tbody>
+</table>
+
+<div class="callout god">
+  <strong>★ 「MY値が大きいほど倍率が大きくなる」現象：</strong>MY3,000+ ×1.13倍 → MY10,000+ ×1.62倍 → <strong>MY15,000+ ×7.53倍</strong>と、<strong>出玉水準が大きくなるほど5/10の異常さが際立つ</strong>。低い水準は誰でも到達しやすいが、上位の水準は高設定がないと届かない。<strong>つまりこの倍率カーブそのものが「本物の高設定が大量投入された証拠」</strong>である。設定詐欺ではなく、実際に出る設定が増えた一日だった。
+</div>
+
+<h3>★ MY10,000+ 一撃爆発の設定別出現率</h3>
+
+<table>
+  <thead>
+    <tr><th>設定</th><th>5/9 出現率</th><th>5/10 出現率</th><th>差分pt</th><th>倍率</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>設定1</td><td>4.51%</td><td>5.86%</td><td>+1.35pt</td><td>×1.30</td></tr>
+    <tr><td>設定2</td><td>4.79%</td><td>5.97%</td><td>+1.18pt</td><td>×1.25</td></tr>
+    <tr><td>設定3</td><td>7.18%</td><td>7.66%</td><td>+0.48pt</td><td>×1.07</td></tr>
+    <tr><td>設定4</td><td>9.57%</td><td>9.48%</td><td>-0.09pt</td><td>×0.99</td></tr>
+    <tr><td>設定5</td><td>17.02%</td><td><strong>21.07%</strong></td><td><span class="num-mega-pos">+4.05pt</span></td><td><strong>×1.24</strong></td></tr>
+    <tr><td>設定6</td><td>24.27%</td><td>20.21%</td><td>-4.06pt</td><td>×0.83</td></tr>
+    <tr class="sum"><td>全体（加重平均）</td><td>6.13%</td><td>9.90%</td><td>+3.77pt</td><td>×1.62</td></tr>
+  </tbody>
+</table>
+
+<p style="font-size:13px;color:var(--sub)"><strong>注目：</strong>各設定単体での MY10,000+ 出現率はほぼ横ばい（設定5は+4.05ptで好調、設定6は-4.06ptで揺らぎあり）。<strong>全体出現率が×1.62倍に跳ね上がったのは、高設定（4-5-6）の使用率が×4.18倍に拡大した構成効果</strong>がほぼ全てを説明する。つまり「設定6が突然出るようになった」ではなく「出る設定6が大量に投入された」のが真相。</p>
+
+<h3>★ MY15,000+ 超大爆発の設定別出現率（全体で×7.53倍）</h3>
+
+<table>
+  <thead>
+    <tr><th>設定</th><th>5/9 出現率</th><th>5/10 出現率</th><th>差分pt</th><th>解釈</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>設定1</td><td>0.11%</td><td>0.19%</td><td>+0.08pt</td><td>誤差レベル</td></tr>
+    <tr><td>設定2</td><td>0.11%</td><td>0.17%</td><td>+0.06pt</td><td>誤差レベル</td></tr>
+    <tr><td>設定3</td><td>0.24%</td><td>0.11%</td><td>-0.13pt</td><td>横ばい</td></tr>
+    <tr><td>設定4</td><td><strong>0.00%</strong></td><td>1.29%</td><td><span class="num-mega-pos">+1.29pt</span></td><td>ゼロ → 突破</td></tr>
+    <tr><td>設定5</td><td>1.06%</td><td>2.86%</td><td><span class="num-mega-pos">+1.80pt</span></td><td>2.7倍超</td></tr>
+    <tr class="god-row"><td><strong>設定6</strong></td><td><strong>0.00%</strong></td><td><strong>4.61%</strong></td><td><span class="num-mega-pos">+4.61pt</span></td><td><strong>ゼロ → 22台に1台</strong></td></tr>
+    <tr class="sum"><td>全体（加重平均）</td><td>0.15%</td><td>1.13%</td><td>+0.98pt</td><td>×7.53倍</td></tr>
+  </tbody>
+</table>
+
+<div class="callout user">
+  <strong>★ お客様目線の劇的変化：</strong>前日5/9は、設定4と設定6でMY15,000+を出せた台が <strong>ゼロ</strong>。それが5/10は <strong>設定4で1.29%、設定6で4.61%（=設定6に座れば22台に1台が15,000枚オーバー）</strong>。<strong>「ゴッドの日に打つと本当に夢が見られる」</strong>が物理的に成立した一日。
+</div>
+
+<h3>★ 設定別「神の出玉」確率（5/10）</h3>
+
+<div class="impact-grid">
+  <div class="impact x">
+    <div class="lbl">設定6 MY15,000+</div>
+    <div class="x-num">4.61%</div>
+    <div class="x-sub">22台に1台が15,000枚超出玉</div>
+  </div>
+  <div class="impact x">
+    <div class="lbl">設定6 MY10,000+</div>
+    <div class="x-num">20.21%</div>
+    <div class="x-sub">設定6台のうち5台に1台が10,000枚超</div>
+  </div>
+  <div class="impact x">
+    <div class="lbl">設定5 MY10,000+</div>
+    <div class="x-num">21.07%</div>
+    <div class="x-sub">設定6を上回る出玉性能を発揮</div>
+  </div>
+</div>
+
+<!-- ============== 勝率分析 ============== -->
+<h2>3｜お客様勝率 31.23% → 40.62%（+9.39pt）</h2>
+
+<p style="color:var(--sub);font-size:13px"><strong>※「マイナス」勝率＝</strong>その日終了時点で <strong>差枚がマイナス（=投資量が出玉を下回った）にならなかった台 ＝ お客様が勝った台</strong>の割合。<br>5/10は全国の100台中40.62台でお客様が勝った計算。前日は31.23台だったので、<strong>+9.39pt = 100台のうち追加で約9台のお客様が勝てるようになった</strong>。</p>
+
+<table>
+  <thead>
+    <tr><th>設定</th><th>5/9 お客様勝率</th><th>5/10 お客様勝率</th><th>差分</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>設定1</td><td>25.44%</td><td>27.07%</td><td><span class="num-pos">+1.63pt</span></td></tr>
+    <tr><td>設定2</td><td>27.83%</td><td>32.42%</td><td><span class="num-pos">+4.59pt</span></td></tr>
+    <tr><td>設定3</td><td>38.24%</td><td>37.34%</td><td>-0.90pt</td></tr>
+    <tr><td>設定4</td><td>38.26%</td><td>43.53%</td><td><span class="num-pos">+5.27pt</span></td></tr>
+    <tr><td>設定5</td><td>66.67%</td><td>64.64%</td><td>-2.03pt</td></tr>
+    <tr><td>設定6</td><td>64.15%</td><td>66.13%</td><td><span class="num-pos">+1.98pt</span></td></tr>
+    <tr class="sum"><td>全設定（加重平均）</td><td><strong>31.23%</strong></td><td><strong>40.62%</strong></td><td><strong>+9.39pt</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout user">
+  <strong>★ 重要な発見：</strong>各設定の勝率は <strong>ほぼ変化していない</strong>（設定1: +1.63pt、設定6: +1.98pt程度）。<strong>各設定の出玉性能は一日で変わらないのに、全体勝率が+9.39pt上がった</strong> — これは100%「設定使用割合の変化」だけで説明できる。<br>つまり <strong>5/10の勝率上昇は偶然や運ではなく、店側の意図的な設定振替の結果と確定できる</strong>。
+</div>
+
+<!-- ============== 出玉指標 ============== -->
+<h2>4｜出玉指標の劇的変化 — 全体KPI</h2>
+
+<table>
+  <thead>
+    <tr><th>指標</th><th>5/9（土）</th><th>5/10（日）</th><th>絶対差</th><th>倍率</th><th>解釈</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>打込（1台/日）</td><td>23,004</td><td>25,381</td><td><span class="num-pos">+2,377</span></td><td>×1.10</td><td>集客効果で打込増加</td></tr>
+    <tr><td>出玉率</td><td>95.58%</td><td><strong>99.75%</strong></td><td><span class="num-pos">+4.17pt</span></td><td>×1.04</td><td><strong>ほぼ等価交換ラインへ</strong></td></tr>
+    <tr><td>MY（一撃出玉）</td><td>4,076枚</td><td>4,693枚</td><td><span class="num-pos">+617枚</span></td><td>×1.15</td><td>1台あたり一撃出玉15%増</td></tr>
+    <tr><td>MY単価（一撃あたりの売上）</td><td>992円</td><td>1,430円</td><td><span class="num-pos">+438円</span></td><td><strong>×1.44</strong></td><td><strong>出玉のキレが鋭くなった</strong></td></tr>
+    <tr><td>玉単価</td><td>4.108円</td><td>3.281円</td><td><span class="num-neg">-0.827</span></td><td>×0.80</td><td>負けが浅い＝出玉ありの証拠</td></tr>
+    <tr><td>玉利（店側1玉あたり粗利）</td><td>1.169円</td><td><strong>0.284円</strong></td><td><span class="num-neg">-0.885</span></td><td><strong>×0.24</strong></td><td><strong>店側利益が約76%消滅</strong></td></tr>
+    <tr><td>1台あたり台粗利</td><td>26,892円/日</td><td>7,208円/日</td><td><span class="num-neg">-19,683円</span></td><td>×0.27</td><td>1台あたり約2万円の集客投資</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>出玉率99.75%の意味：</strong>出玉率100%が「お客様の投資額と払戻し額が均衡する等価交換ライン」。99.75%は <strong>限りなくそれに近い水準</strong>で、ホール側の取り分はわずか0.25%しか残らない極限状態。<strong>玉利が前日の約24%まで圧縮</strong>されており、店側は粗利の約76%を「集客投資」として放出した格好になる。
+</div>
+
+<h3>設定別 玉利・玉単価 — どの設定で何が起きたか</h3>
+
+<table>
+  <thead>
+    <tr><th>設定</th><th>5/9 玉単価</th><th>5/10 玉単価</th><th>5/9 玉利</th><th>5/10 玉利</th><th>玉利の変化</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>設定1</td><td>4.632</td><td>4.345</td><td>+1.897</td><td>+1.748</td><td>ほぼ維持（粗利エンジン健在）</td></tr>
+    <tr><td>設定2</td><td>3.876</td><td>3.567</td><td>+1.284</td><td>+1.013</td><td>微減</td></tr>
+    <tr><td>設定3</td><td>4.008</td><td>3.870</td><td>+0.701</td><td>+0.853</td><td><span class="num-pos">+0.152（むしろ向上）</span></td></tr>
+    <tr><td>設定4</td><td>2.850</td><td>2.530</td><td>-0.111</td><td>-0.273</td><td>赤字深化</td></tr>
+    <tr><td>設定5</td><td>2.741</td><td>2.643</td><td>-2.034</td><td>-1.734</td><td>微改善</td></tr>
+    <tr><td>設定6</td><td>1.554</td><td>1.389</td><td>-2.570</td><td>-2.099</td><td>微改善</td></tr>
+  </tbody>
+</table>
+
+<p style="font-size:13px;color:var(--sub)">各設定単体の玉利は大きく変動していない。<strong>全体玉利が1.169 → 0.284に圧縮されたのは、赤字設定（4-5-6）の構成比が×4.18倍に拡大した「構成効果」</strong>がほぼ全て。</p>
+
+<!-- ============== GW期間との対比 ============== -->
+<h2>5｜なぜ5/10だけが特異だったのか — GWピーク日との対比</h2>
+
+<p>「日曜日」「祝日」という単純なカテゴリでは説明できない。同じ「日曜」でも投入水準が全く違う。</p>
+
+<table>
+  <thead>
+    <tr><th>日付</th><th>属性</th><th>設定1</th><th>設定3</th><th>設定6</th><th>高設定計</th><th>玉利</th><th>出玉率</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>5/3</td><td>GW初日（憲法記念日）</td><td>54.10%</td><td>18.24%</td><td>0.82%</td><td>4.39%</td><td>1.478</td><td>94.07%</td></tr>
+    <tr><td>5/4</td><td>みどりの日</td><td>56.61%</td><td>16.78%</td><td>0.92%</td><td>4.02%</td><td>1.474</td><td>94.12%</td></tr>
+    <tr><td>5/5</td><td>こどもの日</td><td>55.41%</td><td>17.09%</td><td>1.38%</td><td>5.53%</td><td>1.298</td><td>94.92%</td></tr>
+    <tr><td>5/9</td><td>通常の土曜</td><td>46.67%</td><td>21.77%</td><td>2.64%</td><td>8.00%</td><td>1.169</td><td>95.58%</td></tr>
+    <tr class="god-row"><td>5/10</td><td>ゴッドの日</td><td>27.50%</td><td>24.05%</td><td>14.43%</td><td>33.46%</td><td>0.284</td><td>99.75%</td></tr>
+  </tbody>
+</table>
+
+<div class="callout hot">
+  <strong>★ 重要な発見：</strong>GWピーク日（5/3-5/5の祝日3連休）の設定6使用率は <strong>わずか0.82-1.38%</strong>、通常の土曜5/9（2.64%）すら下回る粗利寄せ運用だった。<strong>GW＝高設定投入の日ではなかった</strong>のである。お客様はGWは「行くから打つ」状態のため、店舗は集客投資をしなくても稼働が確保できる。一方5/10は <strong>機種そのものの話題性</strong>がトリガーで、お客様の動機付けに高設定投入が必須だった。
+</div>
+
+<h3>業界の意思決定マトリクス</h3>
+
+<table>
+  <thead>
+    <tr><th>日付タイプ</th><th>集客動因</th><th>店側の対応</th><th>高設定投入レベル</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>GWピーク日</td><td>カレンダー要因</td><td>粗利寄せ</td><td>★☆☆☆☆ 低（4-6%）</td></tr>
+    <tr><td>通常週末</td><td>習慣的来店</td><td>標準運用</td><td>★★☆☆☆ 中（6-10%）</td></tr>
+    <tr><td><strong>機種ネタ日（510等）</strong></td><td><strong>機種固有の話題性</strong></td><td><strong>攻め投資</strong></td><td><strong>★★★★★ 超高（33%超）</strong></td></tr>
+    <tr><td>イベント告知日</td><td>事前訴求</td><td>計画投入</td><td>★★★★☆ 高（15-25%）</td></tr>
+  </tbody>
+</table>
+
+<!-- ============== 翌週への示唆 ============== -->
+<h2>6｜次回ユーザー期待日：★ 6/6（土）がゾロ目＝設定6狙いで最有力</h2>
+
+<div class="callout god">
+  <strong>★ 次の機種ネタ日は5/10からおよそ4週間後に控えている。</strong>ミリオンゴッド/CXは「設定6に賭ける機種」であり、日付のゴロ合わせで <strong>「6/6（土）」</strong>と <strong>「6/10（水）」</strong>の2日が候補。<strong>ユーザー期待値は6/6が最も高い</strong>と見られ、業界の攻めも6/6に集中する可能性が濃厚。
+</div>
+
+<h3>★ なぜ6/6が本命なのか</h3>
+
+<div class="grid-3">
+  <div class="panel god">
+    <h4>🎯 6/6（土）— ゾロ目＝設定6</h4>
+    <p style="font-size:13px;color:var(--sub);margin:6px 0">
+      <strong>「6並び」= ミリオンゴッドの設定6を象徴</strong>するゾロ目日付。さらに <strong>土曜日</strong>のため稼働確保が容易で、店側にとっても集客投資のROIが最も高い。
+    </p>
+    <ul class="tight">
+      <li><strong>ゾロ目 × 土曜 × 機種名連想</strong>の三拍子</li>
+      <li>SNSでも「6/6はゴッド」が拡散しやすい</li>
+      <li>ユーザー期待値が5/10超え予想</li>
+      <li>店側の攻め判断が集中する可能性大</li>
+    </ul>
+    <p style="font-size:12px;margin-top:8px;color:var(--god-dk);font-weight:700">→ 本命の観測日</p>
+  </div>
+  <div class="panel">
+    <h4>📅 6/10（水）— ゴッドの日</h4>
+    <p style="font-size:13px;color:var(--sub);margin:6px 0">
+      5/10の系列で月次定例化するかの観測日。ただし <strong>平日（水曜）</strong>で稼働確保が難しく、店側も攻めにくい。
+    </p>
+    <ul class="tight">
+      <li>平日のため集客投資のROIが低い</li>
+      <li>定例化判定としては重要</li>
+      <li>5/10より落ちる可能性高い</li>
+      <li>定例化確定なら7月以降本格化</li>
+    </ul>
+    <p style="font-size:12px;margin-top:8px;color:var(--sub);font-weight:600">→ 副次的な観測日</p>
+  </div>
+  <div class="panel gold">
+    <h4>📊 6/6 期待値の根拠</h4>
+    <p style="font-size:13px;color:var(--sub);margin:6px 0">
+      過去のスロット業界でも「ゾロ目日付＋機種設定数の連想」は強力な集客装置になっており、特に <strong>土日のゾロ目はSNS拡散力が圧倒的</strong>。
+    </p>
+    <ul class="tight">
+      <li>2/2 番長系の特異日</li>
+      <li>3/3 ひな祭り＋メーカー記念日</li>
+      <li>7/7 七夕＋設定7（北斗等）</li>
+      <li>10/10 体育の日＋ジャグラー系</li>
+    </ul>
+    <p style="font-size:12px;margin-top:8px;color:#92400e;font-weight:700">→ 業界の共通言語として機能</p>
+  </div>
+</div>
+
+<h3>6/6 vs 6/10 ／ 期待値マトリクス</h3>
+
+<table>
+  <thead>
+    <tr><th>観測ポイント</th><th>6/6（土）ゾロ目</th><th>6/10（水）ゴッドの日</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>曜日</td><td><strong>土曜日（稼働◎）</strong></td><td>水曜日（稼働△）</td></tr>
+    <tr><td>ゴロ合わせの強度</td><td><strong>ゾロ目×設定6（最強）</strong></td><td>機種名直結（強）</td></tr>
+    <tr><td>SNS拡散力</td><td>★★★★★</td><td>★★★☆☆</td></tr>
+    <tr><td>店側の攻めやすさ</td><td><strong>★★★★★</strong></td><td>★★☆☆☆</td></tr>
+    <tr><td>ユーザー期待値</td><td><strong>非常に高い</strong></td><td>中程度</td></tr>
+    <tr><td>予想 設定6使用率</td><td><strong>10〜15%（5/10並み）</strong></td><td>3〜6%</td></tr>
+    <tr><td>予想 高設定計</td><td><strong>25〜35%</strong></td><td>10〜15%</td></tr>
+    <tr class="god-row"><td>★ 観測優先度</td><td><strong>最重要（本命）</strong></td><td>副次（定例化判定）</td></tr>
+  </tbody>
+</table>
+
+<h3>自店運用への示唆：6/6（土）向け 推奨配分（10台想定）</h3>
+
+<div class="grid-2">
+  <div class="panel god">
+    <h4>🎯 6/6 攻め型推奨配分</h4>
+    <table style="margin-top:8px">
+      <thead><tr><th>設定</th><th>5/10 全国実績</th><th>自店推奨</th></tr></thead>
+      <tbody>
+        <tr><td>設定1</td><td>27.50%</td><td>3台（30%）</td></tr>
+        <tr><td>設定2</td><td>14.99%</td><td>1台（10%）</td></tr>
+        <tr><td>設定3</td><td>24.05%</td><td>2台（20%）</td></tr>
+        <tr><td>設定4</td><td>11.87%</td><td>2台（20%）</td></tr>
+        <tr><td>設定5</td><td>7.16%</td><td>1台（10%）</td></tr>
+        <tr><td>設定6</td><td>14.43%</td><td><strong>1台（10%）</strong></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;margin-top:8px;color:var(--sub)">想定お客様勝率: <strong>約 40%</strong>　／　1台あたり台粗利: <strong>+7,000〜9,000円/日</strong></p>
+    <p style="font-size:12px;margin-top:6px;color:var(--god-dk);font-weight:600">→ 5/10の全国実績を踏襲した攻め配分。「ゾロ目で6＝設定6」の連想を明確に演出</p>
+  </div>
+  <div class="panel">
+    <h4>📣 6/6 集客の運用ルール</h4>
+    <ul class="tight">
+      <li><strong>前日6/5（金）夜までに告知必須</strong> — 当日朝告知では拡散が間に合わない</li>
+      <li><strong>「ゾロ目はゴッドが熱い」</strong>を訴求軸に — 6/6/6の数字の並びで視覚訴求</li>
+      <li>設定6を1台明示するより <strong>「島全体の40%が高設定」</strong>と訴求する方が効果的</li>
+      <li>6/5（金）の打込稼働も連動して上昇する見込み（前夜祭効果）</li>
+      <li>5/10は出玉率99.75%でほぼ等価交換 → 6/6も同水準の集客投資を覚悟</li>
+      <li><strong>6/6（土）に攻めた後、6/7（日）も連戦で粗利寄せに移行できる</strong> — 土日連戦の運用設計が可能</li>
+    </ul>
+  </div>
+</div>
+
+<h3>📅 6月の運用カレンダー（提案）</h3>
+
+<table>
+  <thead>
+    <tr><th>日付</th><th>曜日</th><th>位置づけ</th><th>推奨運用</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>6/5</td><td>金</td><td>6/6前夜祭</td><td>通常運用＋告知強化</td></tr>
+    <tr class="god-row"><td>6/6</td><td>土</td><td><strong>★ ゾロ目＝設定6狙い（本命）</strong></td><td><strong>攻め配分：高設定計40%</strong></td></tr>
+    <tr><td>6/7</td><td>日</td><td>6/6後の粗利日</td><td>設定1中心の粗利寄せ</td></tr>
+    <tr><td>6/10</td><td>水</td><td>ゴッドの日（副次）</td><td>標準運用＋様子見</td></tr>
+    <tr><td>6/16</td><td>火</td><td>通常</td><td>標準運用</td></tr>
+    <tr><td>6/26</td><td>金</td><td>給料日後の週末前</td><td>通常運用</td></tr>
+  </tbody>
+</table>
+
+<!-- ============== おまけ：朝イチ満席ホール向けの設定5活用論 ============== -->
+<h2>★おまけ｜朝イチ満席ホール向け「設定5厚配分」戦略</h2>
+
+<div class="callout user">
+  <strong>現場の知見：</strong>ミリオンゴッド/CXが <strong>朝イチから満席になるホール</strong>であれば、設定6ではなく <strong>設定5を厚めに配分する</strong>方が戦略的に有利。理由は<strong>「設定5の方がMY値が大きく、ユーザーに大きい一撃出玉を多く提供できる」</strong>という、5/10データで実証された事実にある。
+</div>
+
+<h3>★ 5/10実績で証明された「設定5 > 設定6」現象</h3>
+
+<table>
+  <thead>
+    <tr><th>指標</th><th>設定5</th><th>設定6</th><th>差</th><th>勝者</th></tr>
+  </thead>
+  <tbody>
+    <tr class="highlight"><td><strong>MY（一撃出玉）</strong></td><td><strong>6,630枚</strong></td><td>5,887枚</td><td><span class="num-mega-pos">+743枚（+12.6%）</span></td><td>🏆 設定5</td></tr>
+    <tr class="highlight"><td><strong>MY10,000+ 出現率</strong></td><td><strong>21.07%</strong></td><td>20.21%</td><td><span class="num-pos">+0.86pt</span></td><td>🏆 設定5</td></tr>
+    <tr><td>お客様勝率</td><td>64.64%</td><td>66.13%</td><td>-1.49pt</td><td>設定6（ほぼ同等）</td></tr>
+    <tr><td>MY15,000+ 出現率</td><td>2.86%</td><td>4.61%</td><td>-1.75pt</td><td>設定6（超大爆発）</td></tr>
+    <tr><td>出玉率（店側コスト）</td><td>109.74%</td><td>111.05%</td><td><span class="num-pos">-1.31pt（軽い）</span></td><td>🏆 設定5</td></tr>
+    <tr><td>玉利（店側1玉粗利）</td><td>-1.734</td><td>-2.099</td><td><span class="num-pos">+0.365（赤字浅い）</span></td><td>🏆 設定5</td></tr>
+  </tbody>
+</table>
+
+<div class="callout god">
+  <strong>★ 設定5の不思議な強さ：</strong>5/10の全国データで、<strong>MY値（一撃出玉）は設定5の方が設定6を上回った</strong>。「最高設定なのに、その下の設定の方が一撃で出る」という直感に反する現象。これは <strong>設定6の方が出玉率は高いが、出玉が分散して波形が穏やか</strong>になるのに対し、<strong>設定5は出玉が一撃に集中しやすい</strong>機種特性を示している。<strong>「夢の出玉体験」を提供したいホールにとって、設定5は最強の演出装置</strong>。
+</div>
+
+<h3>★ 設定5活用が「朝イチ満席ホール」に最適な理由</h3>
+
+<div class="grid-3">
+  <div class="panel user">
+    <h4>🎯 ① 大MY提供で稼働持続</h4>
+    <p style="font-size:13px;color:var(--sub)">
+      朝イチ満席ホールはユーザーが長時間粘る傾向。<strong>設定5のMY=6,630枚</strong>を引き当てたユーザーは「もう一撃来るかも」と粘り続け、結果として打込が伸びる。設定6のMY=5,887枚より <strong>+743枚（+12.6%）</strong>の出玉インパクトが、ユーザー体験を強化する。
+    </p>
+    <ul class="tight">
+      <li>大MY = SNS拡散ネタになりやすい</li>
+      <li>「設定5でこんなに出るのか」体験が口コミ化</li>
+      <li>翌週以降の再来店動機になる</li>
+    </ul>
+  </div>
+  <div class="panel gold">
+    <h4>💰 ② 出玉率予算化の制約クリア</h4>
+    <p style="font-size:13px;color:var(--sub)">
+      設定6の出玉率111.05%に対し、設定5は <strong>109.74%（-1.31pt）</strong>。<strong>全体出玉率に予算上限がある店舗</strong>では、設定6を多数投入できない。設定5なら同じ枠で <strong>より多くの台数を高設定化</strong>でき、ユーザー目線の「島全体が熱い」演出が成立する。
+    </p>
+    <ul class="tight">
+      <li>玉利の赤字も-0.365浅く済む</li>
+      <li>同じ予算で高設定台数を1.2倍に</li>
+      <li>店長判断としても通しやすい</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h4>🔥 ③ 「粘るユーザー」と相性◎</h4>
+    <p style="font-size:13px;color:var(--sub)">
+      設定5は <strong>波が荒い（MY15,000+は設定6に劣るが、MY10,000+は上回る）</strong>のが特性。<strong>朝イチから粘って勝ちに行くユーザー</strong>は、波の荒さを「期待値」として消化できる。逆に短時間勝負ユーザー主体のホールでは設定6の方が体感が良い。
+    </p>
+    <ul class="tight">
+      <li>長時間打てるユーザー層向け</li>
+      <li>朝イチから席を取りに来る常連客向け</li>
+      <li>抜けにくい店舗環境で真価発揮</li>
+    </ul>
+  </div>
+</div>
+
+<h3>★ 出玉率予算化シミュレーション：A型 vs B型</h3>
+
+<p>「高設定計20%」という同じ予算枠で、設定6重視と設定5重視の2パターンを比較。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>配分パターン</th>
+      <th>設定6</th>
+      <th>設定5</th>
+      <th>設定4</th>
+      <th>低設定</th>
+      <th>全体 出玉率</th>
+      <th>MY10000+ 出現率</th>
+      <th>提供できる体験</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>A型：設定6重視</strong></td><td>10%</td><td>5%</td><td>5%</td><td>80%</td><td>97.87%</td><td>8.24%</td><td>超大爆発寄り</td></tr>
+    <tr class="god-row"><td><strong>B型：設定5多用（朝イチ満席ホール向け）</strong></td><td>2%</td><td><strong>15%</strong></td><td>3%</td><td>80%</td><td>97.92%</td><td><strong>8.54%</strong></td><td><strong>大MY多発・島全体熱い</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout user">
+  <strong>★ シミュレーション結果：</strong>同じ予算枠（出玉率97.9%前後）で、<strong>B型（設定5多用）の方がMY10,000+の出現率が+0.30pt高い</strong>。さらに「島全体に高設定の気配が出る」演出効果は、設定6を1台ピンポイント投入するA型より優れる。<strong>「朝イチから席が埋まる」「ユーザーが粘る」店舗特性</strong>と相性が良い。
+</div>
+
+<h3>★ ホールタイプ別 推奨配分まとめ</h3>
+
+<table>
+  <thead>
+    <tr><th>ホールタイプ</th><th>推奨型</th><th>設定6</th><th>設定5</th><th>設定4</th><th>運用意図</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>短時間勝負ユーザー主体・空席多め</td><td>A型（設定6重視）</td><td>10%</td><td>5%</td><td>5%</td><td>短時間で「神出玉」を引かせて話題化</td></tr>
+    <tr class="god-row"><td><strong>朝イチ満席・ユーザー粘り傾向</strong></td><td><strong>B型（設定5多用）★</strong></td><td>2%</td><td><strong>15%</strong></td><td>3%</td><td><strong>大MY多発で稼働持続・島全体演出</strong></td></tr>
+    <tr><td>5/10並みの攻め日（6/6本命）</td><td>C型（全面攻め）</td><td>10%</td><td>10%</td><td>10%</td><td>5/10全国実績を踏襲</td></tr>
+    <tr><td>通常運用</td><td>D型（粗利寄せ）</td><td>1%</td><td>2%</td><td>3%</td><td>標準運用・粗利確保</td></tr>
+  </tbody>
+</table>
+
+<div class="callout gold">
+  <strong>★ 店長判断のチェックリスト：</strong>自店でB型（設定5多用）を採用すべきか？以下に3つ以上当てはまるなら推奨。
+  <ul class="tight" style="margin-top:6px">
+    <li>☐ ミリオンゴッド島が <strong>朝イチ（開店30分以内）に満席</strong>になる</li>
+    <li>☐ ユーザーの <strong>平均滞在時間が長い</strong>（4時間以上が多い）</li>
+    <li>☐ <strong>SNS発信に積極的</strong>な常連客が多い</li>
+    <li>☐ 出玉率の <strong>月次予算上限</strong>が定められている</li>
+    <li>☐ 「店長狙い目」の <strong>島全体演出</strong>を重視している</li>
+  </ul>
+</div>
+
+<!-- ============== 総括 ============== -->
+<h2>8｜総括</h2>
+
+<div class="callout god">
+  <strong>★ 結論：</strong>5/10ゴッドの日は、単なる「日曜日」でも「祝日明け」でもなく、<strong>機種名と日付のゴロ合わせが業界全体の意思決定を同期させた稀有な現象</strong>だった。<br><br>
+  
+  検証された3つの事実：<br>
+  ① <strong>設定6使用率が×5.47倍（2.64% → 14.43%）</strong>に拡大、高設定計が×4.18倍に。<br>
+  ② <strong>MY15,000+出現率が×7.53倍</strong>、各設定の出玉性能は変わらないのに「夢の出玉」が全国で多発。<br>
+  ③ <strong>お客様勝率が+9.39pt</strong>、玉利が約76%圧縮 — 店側は明確な集客投資の意思決定を実行。<br><br>
+  
+  これらの数字が示すのは、<strong>「ミリオンゴッド/CXは長期主力機種として業界が育てる」という全国合意</strong>である。
+  <br><br>
+  
+  <strong>★ 次回ユーザー期待日は 6/6（土）が本命。</strong>ゾロ目「6/6」は設定6の象徴であり、土曜日のため集客投資のROIも最大化される。業界の攻めは <strong>6/10（水・平日）より6/6（土）に集中する可能性が濃厚</strong>。<br><br>
+  
+  自店戦略としては <strong>(1) 6/6（土）を最重要観測日・最重要攻め日に設定、(2) 前日6/5（金）夜までに告知完了、(3) 5/10全国実績ベースの攻め配分（高設定計40%）で迎え撃つ、(4) 6/10は副次的観測日として様子見、(5) 朝イチ満席ホールは設定6より設定5を厚めに配分し大MY多発で稼働持続を狙う</strong>の5点を準備することを強く推奨する。
+</div>
+
+<div class="footer">
+  対象日: 2026/05/10（日）vs 2026/05/09（土）｜機種: L/ ミリオンゴッド /CX（2026/04/19発売）<br>
+  作成: 2026/05/11 ｜ © P-Brain 営業資料（ピーブレイン全国データ）｜ データソース: 全国S設定別分布データ
+</div>
+
+</div>
+</body>
+</html>
